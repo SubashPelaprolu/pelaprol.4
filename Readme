@@ -11,6 +11,12 @@ to execute give
 ./oss command
 output will be in output.txt file
 Aging:
+To prevent queue starvation we keep a counter for each queue.
+On dequeue from the queue, we reset this counter to 0, and for all other queues,
+we increase it with 1.
+
+This way we can find out which queue is getting starvation. The limit for starvation is 50 dequeues.
+When we detect a queue has starved, we move,as much process, as we can, from it to the previous queue.
 
 for the version control 
 git log: /classes/OS/pelaprol/pelaprol.1/log
